@@ -384,7 +384,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:6.4.1"
 }
 
-apply plugin: "com.google.gms.google-services"
+// apply plugin: "com.google.gms.google-services"
 apply plugin: "com.google.firebase.crashlytics"
 
 sentry {
