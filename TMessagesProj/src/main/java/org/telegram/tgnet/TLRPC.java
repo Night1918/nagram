@@ -60650,7 +60650,7 @@ public class TLRPC {
         public int msg_id;
 
         public TLObject deserializeResponse(InputSerializedData stream, int constructor, boolean exception) {
-            return messages_SponsoredMessages.TLdeserialize(stream, constructor, exception);
+            return new TLRPC.TL_messages_sponsoredMessagesEmpty();
         }
 
         public void serializeToStream(OutputSerializedData stream) {
