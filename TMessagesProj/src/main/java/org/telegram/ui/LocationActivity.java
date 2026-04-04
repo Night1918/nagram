@@ -82,7 +82,6 @@ import org.telegram.messenger.LocationController;
 import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.NotificationCenter;
-import org.telegram.messenger.OSMDroidMapsProvider;
 import org.telegram.messenger.R;
 import org.telegram.messenger.UserObject;
 import org.telegram.messenger.utils.ViewOutlineProviderImpl;
@@ -765,15 +764,9 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
         mapTypeButton.setSubMenuOpenSide(2);
         mapTypeButton.setAdditionalXOffset(dp(10));
         mapTypeButton.setAdditionalYOffset(-dp(10));
-        if (ApplicationLoader.getMapsProvider() instanceof OSMDroidMapsProvider) {
-            mapTypeButton.addSubItem(map_list_menu_map, R.drawable.msg_map, "Standard OSM", getResourceProvider());
-            mapTypeButton.addSubItem(map_list_menu_satellite, R.drawable.msg_map, "Wikimedia", getResourceProvider());
-            mapTypeButton.addSubItem(map_list_menu_hybrid, R.drawable.msg_map, "Carto Dark", getResourceProvider());
-        } else {
-            mapTypeButton.addSubItem(map_list_menu_map, R.drawable.msg_map, LocaleController.getString(R.string.Map), getResourceProvider());
-            mapTypeButton.addSubItem(map_list_menu_satellite, R.drawable.msg_satellite, LocaleController.getString(R.string.Satellite), getResourceProvider());
-            mapTypeButton.addSubItem(map_list_menu_hybrid, R.drawable.msg_hybrid, LocaleController.getString(R.string.Hybrid), getResourceProvider());
-        }
+        mapTypeButton.addSubItem(map_list_menu_map, R.drawable.msg_map, LocaleController.getString(R.string.Map), getResourceProvider());
+        mapTypeButton.addSubItem(map_list_menu_satellite, R.drawable.msg_satellite, LocaleController.getString(R.string.Satellite), getResourceProvider());
+        mapTypeButton.addSubItem(map_list_menu_hybrid, R.drawable.msg_hybrid, LocaleController.getString(R.string.Hybrid), getResourceProvider());
         mapTypeButton.setContentDescription(LocaleController.getString(R.string.AccDescrMoreOptions));
         Drawable drawable = Theme.createSimpleSelectorCircleDrawable(dp(40), getThemedColor(Theme.key_location_actionBackground), getThemedColor(Theme.key_location_actionPressedBackground));
         ScaleStateListAnimator.apply(mapTypeButton);
@@ -795,9 +788,6 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
                 map.setMapType(IMapsProvider.MAP_TYPE_HYBRID);
             }
         });
-        if (ApplicationLoader.getMapsProvider() instanceof OSMDroidMapsProvider) {
-            mapViewClip.addView(getAttributionOverlay(context), LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.BOTTOM, LocaleController.isRTL ? 0 : 4, 0, LocaleController.isRTL ? 4 : 0, 20));
-        }
 
         locationButton = new ImageView(context);
         drawable = Theme.createSimpleSelectorCircleDrawable(dp(40), getThemedColor(Theme.key_location_actionBackground), getThemedColor(Theme.key_location_actionPressedBackground));

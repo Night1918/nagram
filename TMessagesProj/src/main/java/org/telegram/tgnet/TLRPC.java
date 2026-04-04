@@ -14,7 +14,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
-import org.osmdroid.util.TileSystemWebMercator;
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 
@@ -50,6 +49,7 @@ import java.util.List;
 
 import me.vkryl.core.BitwiseUtils;
 
+import moe.hx030.momogram.maplibre.GeoUtils;
 import cn.hutool.core.util.ArrayUtil;
 import tw.nekomimi.nekogram.NekoXConfig;
 
@@ -5044,15 +5044,15 @@ public class TLRPC {
             }
             result = TLdeserialize(GeoPoint.class, result, stream, constructor, exception);
             // nekox: Fix crash when open invalid location
-            if (result.lat < TileSystemWebMercator.MinLatitude) {
-                result.lat = TileSystemWebMercator.MinLatitude;
-            } else if (result.lat > TileSystemWebMercator.MaxLatitude) {
-                result.lat = TileSystemWebMercator.MaxLatitude;
+            if (result.lat < GeoUtils.MIN_LATITUDE) {
+                result.lat = GeoUtils.MIN_LATITUDE;
+            } else if (result.lat > GeoUtils.MAX_LATITUDE) {
+                result.lat = GeoUtils.MAX_LATITUDE;
             }
-            if (result._long < TileSystemWebMercator.MinLongitude) {
-                result._long = TileSystemWebMercator.MinLongitude;
-            } else if (result._long > TileSystemWebMercator.MaxLongitude) {
-                result._long = TileSystemWebMercator.MaxLongitude;
+            if (result._long < GeoUtils.MIN_LONGITUDE) {
+                result._long = GeoUtils.MIN_LONGITUDE;
+            } else if (result._long > GeoUtils.MAX_LONGITUDE) {
+                result._long = GeoUtils.MAX_LONGITUDE;
             }
             return result;
         }
