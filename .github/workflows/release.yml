@@ -231,7 +231,7 @@ jobs:
           path: ${{ env.APK }}
   upload:
     name: Upload release
-    if: github.event.inputs.upload != 'y'
+    if: github.event.inputs.upload == 'y'
     runs-on: ubuntu-latest
     needs:
       - build
